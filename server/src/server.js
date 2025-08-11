@@ -5,7 +5,8 @@ import cookieParser from 'cookie-parser'
 dotenv.config();
 
 import { PORT } from "./config/env.config.js";
-import userRouter from "./routes/user.routes.js";
+import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.route.js";
 
 const app = express();
 
@@ -15,8 +16,9 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 
-//API EndPoint
-app.use('/api/v1/auth',userRouter)
+//API EndPoints
+app.use('/api/v1/auth',authRouter)
+app.use('/api/v1/user',userRouter)
 
 connectedtoDB().
 then(()=>{
