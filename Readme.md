@@ -1,1 +1,1 @@
-# Complete Authentication and Authorization with MERN
+# Complete Authentication and Authorization with [MERN]
