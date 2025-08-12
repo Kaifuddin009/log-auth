@@ -8,7 +8,7 @@ authRouter.post('/register',registerUser);
 authRouter.post('/login',loginIN);
 authRouter.post('/logout',logOut);
 authRouter.post('/send',authMiddleware,sendVerifyOtp)
-authRouter.post('/isauth',authMiddleware,isAuthenticated)
+authRouter.get('/is-auth',authMiddleware,isAuthenticated)
 authRouter.post('/send-reset-otp',resendOtp)
 authRouter.post('/reset-password',resetPassword)
 
