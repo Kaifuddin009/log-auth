@@ -1,13 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectedtoDB from "./database/mongodb.js"
+//import connectedtoDB from "./src/database/mongodb.js"
+import connectedtoDB from '../server/src/database/mongodb.js';
 import cookieParser from 'cookie-parser'
 dotenv.config();
 import cors from 'cors';
 
-import { PORT } from "./config/env.config.js";
-import authRouter from "./routes/auth.routes.js";
-import userRouter from "./routes/user.route.js";
+//import { PORT } from "./src/config/env.config.js";
+import { PORT } from './src/config/env.config.js'
+import authRouter from "./src/routes/auth.routes.js";
+import userRouter from "./src/routes/user.route.js";
 
 const app = express();
 
