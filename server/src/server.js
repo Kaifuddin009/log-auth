@@ -20,13 +20,17 @@ app.use(cors({origin:allowedOrigin, credentials:true}))
 
 
 //API EndPoints
+app.get('/', (req, res) => {
+  res.send('Backend is running—use /api/v1/auth or other endpoints.');
+});
+
 app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/user',userRouter)
 
 connectedtoDB().
 then(()=>{
 app.listen(PORT, ()=>{
-  console.log(`Serve is running on the port ${PORT}`)
+  console.log(`Serve is running on the port http://localhost:${PORT}`)
 })
 }).catch((error)=>{
   console.log('Not connected with app with DB',error)
