@@ -11,7 +11,7 @@ import userRouter from "./routes/user.route.js";
 
 const app = express();
 
-const allowedOrigin = ['http://localhost:5173']
+const allowedOrigin = ['http://localhost:5173','https://log-auth-one.vercel.app']
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
