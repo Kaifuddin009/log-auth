@@ -6,7 +6,9 @@ import transporter from "../config/nodemailer.config.js";
 
 
 const registerUser = async(req, res)=>{
-  try {
+  try { 
+    console.log("Register endpoint hit. Body:", req.body);
+
     const {name, email, password} = req.body;
     if (!name || !email || !password) {
       return res.status(400).json({success:false, message:"Missing Detalis"})
@@ -19,7 +21,7 @@ const registerUser = async(req, res)=>{
     const hashedPasword = await bcrypt.hash(password, 10);
 
     const createUser = await User.create({name, email, password:hashedPasword})
-    await createUser.save();
+    //await createUser.save();
 
     const token = jwt.sign({id: createUser._id},JWT_SECRET_KEY,{expiresIn})
     res.cookie('token', token, {
@@ -45,7 +47,7 @@ try {
   console.error('Failed to send email:', emailError);
 }
 
-    return res.status(200).json({succes:true,token})
+    return res.status(200).json({success:true,token})
 
   } catch (error) {
     return res.status(400).json({success:false, message:error.message});
@@ -133,6 +135,10 @@ const verifyEmail = async(req, res)=>{
     if (!user) {
       return res.status(400).json({success:false, message:'User not Found'})
     }
+    if (user.isAccountVerified) {
+  return res.status(200).json({ success: true, message: 'Account already verified' });
+}
+
     if (user.verifyOtp === '' || user.verifyOtp !== otp ) {
       return res.status(400).json({success:false, message:'Invalid Otp'})
     }
@@ -144,7 +150,7 @@ const verifyEmail = async(req, res)=>{
     user.verifyOtpExpireAt = 0;
 
     await user.save();
-    return res.status(200).json({succes:true, message:'Email verfiaction successfully'})
+    return res.status(200).json({success:true, message:'Email verfiaction successfully'})
 
   } catch (error) {
     return res.status(400).json({success:false,message:error.message})
